@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>wordle 클론코딩</title>
+    <link
+      href="https://db.onlinewebfonts.com/c/4789cf828c01b22acb9b2b73ee91aa0d?family=NYTKarnakCondensed"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <script src="Wordle.js"></script>
+
+    <header>
+      <div class="header-menu">
+        <img src="./asset/bars-3.svg" alt="more_information" />
+      </div>
+      <div class="header-logo">Wordle</div>
+      <div class="header-right">
+        <img src="./asset/question-mark.svg" alt="advice" />
+        <img src="./asset/trophy.svg" alt="rank" />
+        <img src="./asset/sawtooth.svg" alt="set-up" />
+        <div class="save-money">Save 50% on Games</div>
+      </div>
+    </header>
+    <main>
+      <div id="timer">time : 00:00</div>
+      <div class="board-row row-0">
+        <div class="board-block" data-index="00"></div>
+        <div class="board-block" data-index="01"></div>
+        <div class="board-block" data-index="02"></div>
+        <div class="board-block" data-index="03"></div>
+        <div class="board-block" data-index="04"></div>
+      </div>
+      <div class="board-row row-1">
+        <div class="board-block" data-index="05"></div>
+        <div class="board-block" data-index="06"></div>
+        <div class="board-block" data-index="07"></div>
+        <div class="board-block" data-index="08"></div>
+        <div class="board-block" data-index="09"></div>
+      </div>
+      <div class="board-row row-2">
+        <div class="board-block" data-index="10"></div>
+        <div class="board-block" data-index="11"></div>
+        <div class="board-block" data-index="12"></div>
+        <div class="board-block" data-index="13"</div>
+        <div class="board-block" data-index="14"></div>
+      </div>
+      <div class="board-row row-3">
+        <div class="board-block" data-index="15"></div>
+        <div class="board-block" data-index="16"></div>
+        <div class="board-block" data-index="17"></div>
+        <div class="board-block" data-index="18"></div>
+        <div class="board-block" data-index="19"></div>
+      </div>
+      <div class="board-row row-4">
+        <div class="board-block" data-index="20"></div>
+        <div class="board-block" data-index="21"></div>
+        <div class="board-block" data-index="22"></div>
+        <div class="board-block" data-index="23"></div>
+        <div class="board-block" data-index="24"></div>
+      </div>
+      <div class="board-row row-5">
+        <div class="board-block" data-index="25"></div>
+        <div class="board-block" data-index="26"></div>
+        <div class="board-block" data-index="27"></div>
+        <div class="board-block" data-index="28"></div>
+        <div class="board-block" data-index="29"></div>
+      </div>
+    </main>
+    <footer>
+      <div class="keyboard-top">
+        <ul>
+          <li data-key="Q">Q</li>
+          <li data-key="W">W</li>
+          <li data-key="E">E</li>
+          <li data-key="R">R</li>
+          <li data-key="T">T</li>
+          <li data-key="Y">Y</li>
+          <li data-key="U">U</li>
+          <li data-key="I">I</li>
+          <li data-key="O">O</li>
+          <li data-key="P">P</li>
+        </ul>
+      </div>
+      <div class="keyboard-bottom">
+        <ul class="keyboard-bottom__top">
+          <li data-key="A">A</li>
+          <li data-key="S">S</li>
+          <li data-key="D">D</li>
+          <li data-key="F">F</li>
+          <li data-key="G">G</li>
+          <li data-key="H">H</li>
+          <li data-key="J">J</li>
+          <li data-key="K">K</li>
+          <li data-key="L">L</li>
+        </ul>
+        <ul class="keyboard-bottom__bottom">
+          <li data-key="ENTER">ENTER</li>
+          <li data-key="Z">Z</li>
+          <li data-key="X">X</li>
+          <li data-key="C">C</li>
+          <li data-key="V">V</li>
+          <li data-key="B">B</li>
+          <li data-key="N">N</li>
+          <li data-key="M">M</li>
+          <li data-key="BACK"><img src="./asset/backspace.svg" alt="backspace" /></li>
+        </ul>
+      </div>
+    </footer>
+  </body>
+</html>
