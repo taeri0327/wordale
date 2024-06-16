@@ -3,6 +3,7 @@ const 정답 = "APPLE";
 let attempts = 0;
 let index = 0;
 let timer;
+const clickKey = document.querySelector("footer");
 
 function appStart() {
   const displayGameover = () => {
@@ -25,6 +26,26 @@ function appStart() {
     index = 0;
   };
 
+  const clickKeyboard = (event) => {
+    const clickKey = event.target.innerText; //event가 발생한 객체의 innertext = key
+    const clickBlock = document.querySelector(
+      `.board-block[data-index='${attempts}${index}']`
+    );
+
+    if (clickKey === "") {
+      // 만약 event가 발생한 개체의 text가 비어있으면
+      handleBackspace();
+      //backspace를 눌렀을 때 화면에 표시되는게 지워짐
+    } else if (index === 5) {
+      //엔터키 클릭했을 때
+      if (clickKey === "ENTER") handleEnterKey();
+      else return;
+    } else if ("A" <= clickKey && clickKey <= "Z" && clickKey.length == 1) {
+      clickBlock.innerText = clickKey;
+      index += 1;
+    }
+  };
+
   const handleEnterKey = () => {
     //정답확인코드 입력
     let 맞은_갯수 = 0;
@@ -34,11 +55,16 @@ function appStart() {
       );
       const 입력한_글자 = block.innerText;
       const 정답_글자 = 정답[i];
+      const keyboard = document.querySelector(
+        `.browser-block[data-key='${block.innerText}']`
+      );
       if (입력한_글자 === 정답_글자) {
         맞은_갯수 += 1;
         block.style.background = "#6AAA64";
+        keyboard.style.background = "#787C7E";
       } else if (정답.includes(입력한_글자)) block.style.background = "#C9B458";
       else block.style.background = "#787C7E";
+      keyboard.style.background = "#787C7E";
       block.style.color = "white";
     }
     if (맞은_갯수 === 5) gameover();
@@ -87,6 +113,7 @@ function appStart() {
   };
   starTimer();
   window.addEventListener("keydown", handlekeydown);
+  clickKey.addEventListener("click", clickKeyboard);
 }
 
 appStart();
