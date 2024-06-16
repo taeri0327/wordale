@@ -4,14 +4,16 @@ let attempts = 0;
 let index = 0;
 let timer;
 const clickKey = document.querySelector("footer");
+const rotate = [{ transform: "rotate(360deg)" }];
 
 function appStart() {
   const displayGameover = () => {
     const div = document.createElement("div");
     div.innerText = "게임이 종료됐습니다.";
     div.style =
-      "display: flex; justify-content: center; align-items: center; position : absolute; top:40vh; left:38%; background-color:white; width:200px; height:100px; border: 1px solid black";
+      "display: flex; justify-content: center; align-items: center; position : absolute; top:40vh; left:38%; background-color:white; width:200px; height:100px; border: 1px solid black; transition: 3s ease-in;";
     document.body.appendChild(div);
+    div.animate(rotate, 1000);
   };
 
   const gameover = () => {
