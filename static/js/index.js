@@ -1,5 +1,3 @@
-const 정답 = "APPLE";
-
 let attempts = 0;
 let index = 0;
 let timer;
@@ -48,9 +46,18 @@ function appStart() {
     }
   };
 
-  const handleEnterKey = () => {
+  const handleEnterKey = async () => {
     //정답확인코드 입력
     let 맞은_갯수 = 0;
+    const 응답 = await fetch("/answer"); //await구문은 함수앞에 async를 넣어줘야 사용가능,
+    //fetch()->javaScript에서 서버에 요청을 보낼때 사용
+    //await 이라는 구문? -> 서버에서 서버로 요청을 보내고 응답을 기다리는 구문
+
+    console.log("응답", 응답);
+    const 정답_객체 = await 응답.json();
+    //.json() -> JavaScript object notation의 약자 = 자바스크립트에 맞는 포맷으로 바꿔준다
+    console.log("정답_객체", 정답_객체);
+
     for (let i = 0; i < 5; i++) {
       const block = document.querySelector(
         `.board-block[data-index='${attempts}${i}']`
