@@ -8,34 +8,48 @@ const rotateX = [{ transform: "rotateX(360deg)" }];
 
 //전체를 하나의 함수로 지정 = appStart()
 function appStart() {
-  // body에 <div style="~~">게임이 종료됐습니다.</div>를 추가
-  // 과제 : 회전애니메이션효과 주기
-  const displayGameover = () => {
+  //게임종료
+  // 1. 게임종료win
+  const gameoverWin = () => {
+    //게임종료시에는 맨처음 입력한 최하단 키보드 클릭이벤트삭제
+    window.removeEventListener("keydown", handlekeydown);
+    // body에 <div style="~~">축하합니다. 승리했습니다!</div>를 추가
+    const div = document.createElement("div");
+    div.innerText = "축하합니다. 승리했습니다!";
+    div.style =
+      "font-family:Do Hyeon, sans-serif; display: flex; justify-content: center; align-items: center; position : absolute; top:40vh; left:38%; background-color:white; width:200px; height:100px; border: 10px solid #6AAA64; transition: 3s ease-in; box-shadow: 12px 12px 2px 1px rgba(0, 0, 0, .2);";
+    document.body.appendChild(div);
+
+    div.animate(rotate, 1000);
+
+    // 게임종료시 interval clear -> 1초마다 주기성 반복 종료
+    clearInterval(timer);
+  };
+
+  // 2. 게임종료lose
+  const gameoverLose = () => {
+    //게임종료시에는 맨처음 입력한 최하단 키보드 클릭이벤트삭제
+    window.removeEventListener("keydown", handlekeydown);
+    // body에 <div style="~~">게임이 종료됐습니다.</div>를 추가
     const div = document.createElement("div");
     div.innerText = "게임이 종료됐습니다.";
     div.style =
-      "display: flex; justify-content: center; align-items: center; position : absolute; top:40vh; left:38%; background-color:white; width:200px; height:100px; border: 1px solid black; transition: 3s ease-in;";
+      "font-family:Do Hyeon, sans-serif; display: flex; justify-content: center; align-items: center; position : absolute; top:40vh; left:38%; background-color:white; width:200px; height:100px; border: 10px solid #d3d6da; transition: 3s ease-in; box-shadow: 12px 12px 2px 1px rgba(0, 0, 0, .2);";
     document.body.appendChild(div);
-    // !! 과제
-    div.animate(rotate, 1000);
-  };
 
-  //게임종료
-  const gameover = () => {
-    //게임종료시에는 맨처음 입력한 최하단 키보드 클릭이벤트삭제
-    window.removeEventListener("keydown", handlekeydown);
-    displayGameover();
+    div.animate(rotate, 1000);
+
     // 게임종료시 interval clear -> 1초마다 주기성 반복 종료
     clearInterval(timer);
   };
 
   //다음줄로 넘어가기
   const nextLine = () => {
-    //만약 시도가 6번째면 게임종료 호출
-    if (attempts === 6) return gameover();
-    //아니면 다음줄의 첫번째 칸으로 넘어감
+    //default = 다음줄의 첫번째 칸으로 넘어감
     attempts += 1;
     index = 0;
+    //만약 시도가 6번째면 게임종료 호출
+    if (attempts === 6) gameoverLose(); // 순서 바꿔주니까 코드 실행됨
   };
 
   //키보드를 클릭했을 때 이벤트
@@ -69,14 +83,6 @@ function appStart() {
   const handleEnterKey = async () => {
     //정답확인코드 입력
     let 맞은_갯수 = 0;
-    // const 응답 = await fetch("/answer"); //await구문은 함수앞에 async를 넣어줘야 사용가능,
-    //fetch()->javaScript에서 서버에 요청을 보낼때 사용
-    //await 이라는 구문? -> 서버에서 서버로 요청을 보내고 응답을 기다리는 구문
-
-    // console.log("응답", 응답);
-    // const 정답_객체 = await 응답.json();
-    //.json() -> JavaScript object notation의 약자 = 자바스크립트에 맞는 포맷으로 바꿔준다
-    // console.log("정답_객체", 정답_객체);
 
     for (let i = 0; i < 5; i++) {
       const block = document.querySelector(
@@ -99,12 +105,16 @@ function appStart() {
         block.style.border = "2px solid #6AAA64";
         // ~.includes('?')->~에 ?가 들어가있니 -> 맞으면 true
       } else if (정답.includes(입력한_글자)) {
+        block.animate(rotateX, 500);
+        block.animate({ easing: "ease-in-out" });
         block.style.background = "#C9B458";
         keyboard.style.background = "#C9B458";
         block.style.color = "white";
         keyboard.style.color = "white";
         block.style.border = "2px solid #C9B458";
       } else {
+        block.animate(rotateX, 500);
+        block.animate({ easing: "ease-in-out" });
         block.style.background = "#787C7E";
         keyboard.style.background = "#787C7E";
         block.style.color = "white";
@@ -112,7 +122,7 @@ function appStart() {
       }
     }
     //5개 다 맞으면 게임종료 호출
-    if (맞은_갯수 === 5) gameover();
+    if (맞은_갯수 === 5) gameoverWin();
     //5개 다 맞은게 아니면 다음줄로 가깅
     else nextLine();
   };
